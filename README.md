@@ -1,14 +1,47 @@
-# SkyTrack (linux-skytrack)
+# Linux-SkyTrack (linux-skytrack)
 
-**Current version: 1.2.1 (2026-11-09)**
+**Current version: 1.4.0 (2026-11-09)**
 
-A flight log and live flight tracker for Ubuntu. Log your trips, see them on a map (street, satellite or an offline outline map) with pins on every airport you have visited, and let SkyTrack count the kilometres and build statistics per year, month and day. Watch all air traffic around you live, track any flight by its number, get a poster of your year in the air, and keep backups on your disk, in Google Drive or in iCloud Drive.
+A flight log and live flight tracker for Ubuntu. Log your trips, see them on a map (street, satellite or an offline outline map) with pins on every airport you have visited, and let SkyTrack count the kilometres and build statistics per year, month and day. Watch all air traffic around you live, listen to the control tower, track any flight by its number, get a poster of your year in the air, and keep backups on your disk, in Google Drive or in iCloud Drive.
 
 Part of the **JGu Linux Apps** series. Created by: JGu · Supported by Claude.
 
 ![icon](icons/hicolor/scalable/apps/linux-skytrack.svg)
 
 ## Version history
+
+### 1.4.0 (2026-11-09): Linux-SkyTrack
+
+- **New name in the app menu: Linux-SkyTrack** (also in the window title, on the login screen and in *About*). Your trips, settings, login and backups stay as they are; the command is still `linux-skytrack`.
+- **Start-up splash screen**, GIMP-style: a large night-sky board with the app icon, flight routes over the horizon, the version, “Created by: JGu · Supported by Claude” and a progress bar showing what is loading (airports, map). The airports and the main window now load behind it, so you see something the moment you click the icon.
+
+### 1.3.4 (2026-11-09)
+
+- **LiveATC's “are you human” check is shown whole.** When LiveATC shows its check page, the LIVE window grows (also from the collapsed bar) and zooms out, so the check is visible without scrolling; the bar says *LiveATC check…*. Once it is passed the window returns to its size and the radio starts. The *Check for new towers* window is bigger and zoomed out too.
+
+### 1.3.3 (2026-11-09)
+
+- **LIVE starts playing by itself:** press LIVE (or pick another tower) and the radio starts — no need to press Play in the window. WebKit muted sound that started without a click; SkyTrack now allows it for the LIVE window only and presses the player's own Play button. If the player gets stuck on “buffering”, Play is pressed again.
+- **The LIVE bar shows the player's state:** *playing* (the dot lights up), *connecting…*, or *press Play in the window* if it could not be started. *Playing* with silence means the frequency is quiet — at smaller airports and in the evening there can be minutes without a word.
+- If the LIVE page crashes, it is reloaded once instead of leaving an empty window.
+- **Crash log:** errors and hard crashes are written to `~/.cache/linux-skytrack/crash.log`.
+
+### 1.3.2 (2026-11-09)
+
+- **The LIVE window can be collapsed to a small bar** (⌄ next to ✕): only the tower name, ↗ (open in browser), ⌃ (expand) and ✕ stay in the corner, and the radio keeps playing. SkyTrack remembers the choice, so the next LIVE starts collapsed too.
+
+### 1.3.1 (2026-11-09)
+
+- **LIVE plays instead of showing the airport page.** When SkyTrack did not yet know a feed's player address, the mini window showed LiveATC's airport page and its *LISTEN* button did nothing (LiveATC opens the player in a pop-up, which was blocked). Now SkyTrack finds the chosen feed on that page, opens its player in the mini window, starts it and remembers the address for next time. A *LISTEN* pop-up also opens inside the mini window.
+- The package recommends the GStreamer audio plugins WebKit needs to play the stream.
+
+### 1.3.0 (2026-11-09): LIVE tower radio
+
+- **LIVE button in the header bar** with a tower picker (▾). Press **LIVE** and a small window opens in the bottom-right corner with the **official LiveATC.net listening page** of the chosen tower. It keeps playing on every tab and **turns off when you minimise SkyTrack** (or close it, or lock it). Collapse it with ⌄ to a small bar that keeps playing. Click the window's title to open the same page in your browser instead (the in-app radio stops, so you never hear it twice); ✕ turns it off.
+- **Tower list built in** (Polish towers first: Warsaw tower, approach and ground, Katowice, Wrocław; Gdańsk, Kraków and Łódź are marked *offline* — their LiveATC feeds are down). Switch on *Other European countries too* for the rest of Europe.
+- **Check for new towers** (in the ▾ menu and *Menu → Check for new towers (LIVE)…*): SkyTrack opens LiveATC's own feed list in a window, reads which feeds exist and which are up, and tells you what is new (for example when Gdańsk comes back). If LiveATC shows “Verify you are human”, tick it yourself; this is needed only now and then. Nothing is checked in the background.
+- **Add your own source (URL):** any page with a live stream (a webcam, another ATC site). Own sources are marked ★ and can be removed.
+- **Licence changed:** from 1.3.0 SkyTrack is freeware — free to use and to share unmodified, modification not allowed (see `LICENSE`). Earlier versions stay under MIT.
 
 ### 1.2.1 (2026-11-09)
 
@@ -123,6 +156,7 @@ Part of the **JGu Linux Apps** series. Created by: JGu · Supported by Claude.
 - **Statistics:** kilometres, flights, time in the air, airports, countries, longest flight, around the Earth / to the Moon, year → month → day breakdown, visited countries.
 - **Plans:** a calculator for distance, flight time, local arrival and return times and time zones; upcoming trips with countdowns; optional iCloud album.
 - **Live:** all air traffic in view, from → to routes, tracking by flight number or callsign, automatic tracking of your flights with notifications.
+- **LIVE tower radio:** the official LiveATC.net page of a chosen tower in a mini window that plays on every tab and stops when the app is minimised; check for new towers; own sources.
 - **Summary:** a poster of your year (or all years), saved as PNG.
 - **Import / export:** spreadsheet template with drop-down lists (`.ods`), `.xlsx`, CSV from myFlightradar24 and Flighty; CSV export.
 - **Backups:** one-file backups, restore, weekly automatic backups, optional copy in Google Drive / any folder / iCloud Drive.
@@ -167,6 +201,14 @@ Airports are recognised by IATA / ICAO code, “(GDN/EPGD)” or city name. Dupl
 - **OpenSky Network** is a fall-back. Without an account it allows 400 requests a day; a free OpenSky API client (Account → API client) gives 4,000. The client id and secret are stored in `~/.config/linux-skytrack/opensky.json` (mode 600).
 - Positions come from volunteers' receivers: over oceans and in some regions there may be none (“No signal”).
 
+## LIVE tower radio
+
+- SkyTrack does not receive, record or re-stream any radio. The mini window shows the official LiveATC.net listening page as a browser would, and LiveATC.net's terms apply. SkyTrack is not affiliated with LiveATC.net.
+- A feed that is *playing* but silent is usually just a quiet frequency (no traffic at that moment), not a broken feed.
+- Feeds are run by volunteers near airports and can go offline at any time; the status in the list is the one seen at the last *Check for new towers*. Gdańsk (EPGD) has been offline on LiveATC since 2022.
+- In Poland receiving radio needs no permit, but what you hear must not be recorded or passed on. Check the rules where you live.
+- The tower list ships with the app (`/usr/share/linux-skytrack/data/stations.json`); the list saved by the last check is `~/.local/share/linux-skytrack/stations.json`.
+
 ## Backups
 
 - **Menu → Backup…** creates a `.skytrack` file (a zip with the database, settings and the account hash), restores one, and lists the automatic weekly backups (the last 5 are kept in `~/.local/share/linux-skytrack/backups/`). Before every restore the current state is saved.
@@ -181,7 +223,8 @@ Airports are recognised by IATA / ICAO code, “(GDN/EPGD)” or city name. Dupl
 | Account (password hash) | `~/.config/linux-skytrack/auth.json` |
 | OpenSky account (optional) | `~/.config/linux-skytrack/opensky.json` |
 | Automatic backups | `~/.local/share/linux-skytrack/backups/` |
-| Map tiles, photo thumbnails, routes | `~/.cache/linux-skytrack/` |
+| Tower list from the last check | `~/.local/share/linux-skytrack/stations.json` |
+| Map tiles, photo thumbnails, routes, crash log | `~/.cache/linux-skytrack/` |
 
 The login protects access to the app; it does not encrypt the trips database. *Menu → Open data folder* opens the data folder.
 
@@ -224,6 +267,8 @@ skytrack/live_page.py     Live tab: tracking panel, air traffic, settings
 skytrack/live.py          tracker: flight number → callsign, OpenSky client, events, ETA
 skytrack/adsb.py          ADS-B networks (adsb.lol, airplanes.live, adsb.fi) and route lookups
 skytrack/traffic.py       air traffic layer: every aircraft in view
+skytrack/atc.py           LIVE tower radio: tower list, LiveATC feed-list check
+skytrack/atc_ui.py        LIVE button, tower picker, mini window, check dialog
 skytrack/summary_page.py  Summary tab
 skytrack/wrapped.py       year summary: numbers and the poster (cairo)
 skytrack/backup.py        backup / restore (.skytrack = zip)
@@ -239,7 +284,7 @@ skytrack/theme.py         System / Flighty / Matrix looks
 skytrack/i18n.py          interface language; i18n_en.py: English texts
 skytrack/{db,geo,stats,airports}.py   storage, geometry and time zones, aggregation, airports
 web/                      map page (Leaflet 1.9.4, topojson-client, world.js)
-data/                     airports, airlines, airport popularity, Polish country names
+data/                     airports, airlines, airport popularity, Polish country names, tower list
 templates/                import templates (Polish and English)
 packaging/                desktop file, polkit policy, confirm-admin helper
 tools/                    build scripts
@@ -255,4 +300,5 @@ tools/                    build scripts
 - Fall-back live data: [The OpenSky Network](https://opensky-network.org), for non-commercial use.
 - Airline codes and airport route counts: [OpenFlights](https://openflights.org/data.php), Open Database License (ODbL).
 - [Leaflet](https://leafletjs.com/), BSD-2-Clause.
-- Application code: MIT.
+- Tower radio: the official listening pages of [LiveATC.net](https://www.liveatc.net), shown as in a browser; LiveATC.net terms apply.
+- Application: **freeware, no modifications** (see `LICENSE`): free to use and to redistribute unmodified, free of charge; modifying it is not allowed. Versions before 1.3.0: MIT.
