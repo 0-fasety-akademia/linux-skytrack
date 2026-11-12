@@ -78,6 +78,7 @@ class PassCard(Gtk.Box):
     __gsignals__ = {
         "edit": (GObject.SignalFlags.RUN_FIRST, None, (object,)),
         "return-flight": (GObject.SignalFlags.RUN_FIRST, None, (object,)),
+        "calendar": (GObject.SignalFlags.RUN_FIRST, None, (object,)),
     }
 
     def __init__(self, info, buttons=True, caption=None):
@@ -156,6 +157,12 @@ class PassCard(Gtk.Box):
             ed = Gtk.Button(label=_('Edytuj'))
             ed.add_css_class("flat")
             ed.connect("clicked", lambda *_: self.emit("edit", info.trip))
+            if info.planned:
+                cal = Gtk.Button(label=_('📅 Do kalendarza'),
+                                 tooltip_text=_('Dodaj ten lot (i powrót, jeśli jest) do kalendarza'))
+                cal.add_css_class("flat")
+                cal.connect("clicked", lambda *_: self.emit("calendar", info))
+                row.append(cal)
             row.append(ret)
             row.append(ed)
             self.append(row)

@@ -19,6 +19,7 @@ class PlanPage(Gtk.ScrolledWindow):
         "edit": (GObject.SignalFlags.RUN_FIRST, None, (object,)),
         "return-flight": (GObject.SignalFlags.RUN_FIRST, None, (object,)),
         "show-trip": (GObject.SignalFlags.RUN_FIRST, None, (int,)),
+        "calendar": (GObject.SignalFlags.RUN_FIRST, None, (object,)),
     }
 
     def __init__(self, airports):
@@ -293,6 +294,7 @@ class PlanPage(Gtk.ScrolledWindow):
                 card.ret_btn.set_visible(False)
             card.connect("edit", lambda _c, tr: self.emit("edit", tr))
             card.connect("return-flight", lambda _c, tr: self.emit("return-flight", tr))
+            card.connect("calendar", lambda _c, info: self.emit("calendar", info))
             click = Gtk.GestureClick()
             click.connect("released", self._on_card_click, card, i.trip.id)
             card.add_controller(click)

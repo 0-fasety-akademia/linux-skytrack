@@ -8,7 +8,7 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk
 
-from . import geo, importer, photos, stats
+from . import badges, calexport, geo, importer, photos, stats
 from .db import Trip
 from . import backup, cloud
 from .atc_ui import AtcControl
@@ -234,6 +234,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.plan_page.connect("edit", lambda _p, t: self.edit_trip(t))
         self.plan_page.connect("return-flight", lambda _p, t: self.return_flight(t))
         self.plan_page.connect("show-trip", lambda _p, tid: self.show_trip(tid))
+        self.plan_page.connect("calendar", lambda _p, info: self.add_to_calendar(info))
         self.stack.add_titled_with_icon(self.plan_page, "plans", _('Plany'), "x-office-calendar-symbolic")
 
         # Stats page ------------------------------------------------------------------------
@@ -404,6 +405,47 @@ class MainWindow(Adw.ApplicationWindow):
         self.year = self._years[i - 1] if self._years and 0 < i <= len(self._years) else None
         self._apply()
 
+    def add_to_calendar(self, info):
+        """Planned trip → calendar: the flight and, for a there-and-back trip, its return flight."""
+        legs = [info]
+        partner = self._partner(info)
+        if partner is not None and partner.planned:
+            legs.append(partner)
+        legs.sort(key=lambda i: (i.trip.dep_date, i.trip.dep_time))
+        try:
+            how = calexport.export(legs, self)
+        except OSError as e:
+            self.toasts.add_toast(Adw.Toast(title=_('Nie udało się zapisać pliku kalendarza: {0}').format(e)))
+            return
+        n = len(legs)
+        if how == "calendar":
+            msg = _('Otwieram Linux iCloud Calendar: {0}').format(
+                _('2 wydarzenia (wylot i powrót)') if n == 2 else _('1 wydarzenie'))
+        else:
+            msg = _('Otwieram plik kalendarza w domyślnej aplikacji')
+        self.toasts.add_toast(Adw.Toast(title=msg, timeout=4))
+
+    def _update_badges(self, all_flown, home):
+        """Badges for the whole log; a toast when a new one was earned (not on the first load)."""
+        items = badges.compute(all_flown, home)
+        self.stats_page.set_badges(items)
+        keys = {b.key for b in items if b.earned}
+        prev = getattr(self, "_badge_keys", None)
+        if prev is not None:
+            new = [b for b in items if b.earned and b.key not in prev]
+            if new:
+                title = _('🏅 Nowa odznaka: {0}').format(new[0].name)
+                if len(new) > 1:
+                    title += _(' (+{0} kolejne)').format(len(new) - 1)
+                t = Adw.Toast(title=title, timeout=6, button_label=_('Pokaż'))
+                t.connect("button-clicked", lambda *_a: self._show_badges())
+                self.toasts.add_toast(t)
+        self._badge_keys = keys
+
+    def _show_badges(self):
+        self.stack.set_visible_child_name("stats")
+        GLib.idle_add(self.stats_page.scroll_to_badges)
+
     def _apply(self, select_id=None):
         self.infos = stats.filter_year(self.all_infos, self.year)
         flown = stats.flown(self.infos)
@@ -435,6 +477,7 @@ class MainWindow(Adw.ApplicationWindow):
 
         self.map.set_trips(self.infos, home)
         self.stats_page.refresh(flown, self.year, plans, home, home_name)
+        self._update_badges(all_flown, home)
         self.summary_page.refresh(all_flown, self.year, home)
         self.live_page.set_trips(self.all_infos)
         sel = select_id if select_id is not None else self._selected_id
@@ -523,6 +566,7 @@ class MainWindow(Adw.ApplicationWindow):
         card = PassCard(info, caption=caption)
         card.connect("edit", lambda _c, tr: self.edit_trip(tr))
         card.connect("return-flight", lambda _c, tr: self.return_flight(tr))
+        card.connect("calendar", lambda _c, i: self.add_to_calendar(i))
         if partner is not None:
             card.ret_btn.set_visible(False)       # the return flight already exists
         else:

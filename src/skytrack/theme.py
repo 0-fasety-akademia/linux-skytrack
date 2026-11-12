@@ -37,6 +37,10 @@ BASE = """
 .pass-sub { font-size: 10px; opacity: .6; font-feature-settings: "tnum"; }
 .pass-sep { border-top: 1px dashed alpha(currentColor, .25); margin: 8px 0 6px 0; min-height: 0; background: none; }
 
+.badge-card { padding: 12px 8px; }
+.badge-card .badge-icon { font-size: 30px; }
+.badge-card.locked .badge-icon { opacity: .35; }
+.badge-card.locked .heading { opacity: .7; }
 .badge { border-radius: 99px; padding: 2px 10px; font-weight: 800; font-size: 11px;
          background: alpha(@accent_bg_color, .18); color: @accent_color; }
 .badge.planned { background: alpha(@warning_color, .18); color: @warning_color; }

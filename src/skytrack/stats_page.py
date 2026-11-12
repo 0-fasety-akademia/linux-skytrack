@@ -193,12 +193,66 @@ class StatsPage(Gtk.ScrolledWindow):
         box.append(self.tree_group)
         self._tree_rows = []
 
+        # badges: always for the whole log (not the selected year)
+        self.badges_group = Adw.PreferencesGroup(title=_('Odznaki'))
+        self.badges_flow = Gtk.FlowBox(selection_mode=Gtk.SelectionMode.NONE, homogeneous=True,
+                                       min_children_per_line=2, max_children_per_line=4,
+                                       column_spacing=10, row_spacing=10)
+        self.badges_group.add(self.badges_flow)
+        box.insert_child_after(self.badges_group, self.chart_group)
+
+    def set_badges(self, items):
+        """items: badges.compute(...) for all flown trips."""
+        self.badges_flow.remove_all()
+        got = sum(1 for b in items if b.earned)
+        self.badges_group.set_description(_('Zdobyte: {0} z {1} · za cały dziennik lotów').format(got, len(items)))
+        for b in sorted(items, key=lambda b: (not b.earned, -b.progress)):
+            card = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
+            card.add_css_class("card")
+            card.add_css_class("badge-card")
+            if not b.earned:
+                card.add_css_class("locked")
+            icon = Gtk.Label(label=b.icon)
+            icon.add_css_class("badge-icon")
+            card.append(icon)
+            name = Gtk.Label(label=b.name, wrap=True, justify=Gtk.Justification.CENTER)
+            name.add_css_class("heading")
+            card.append(name)
+            desc = Gtk.Label(label=b.desc, wrap=True, justify=Gtk.Justification.CENTER)
+            desc.add_css_class("dim-label")
+            desc.add_css_class("caption")
+            card.append(desc)
+            if b.earned:
+                when = Gtk.Label(label=_('zdobyta {0}').format(stats.nice_date(b.earned_on)))
+                when.add_css_class("caption")
+                when.add_css_class("success")
+                card.append(when)
+            else:
+                bar = Gtk.ProgressBar(fraction=b.progress)
+                card.append(bar)
+                if b.target > 1:
+                    val = geo.fmt_int(b.value) if b.target >= 1000 else str(b.value)
+                    tgt = geo.fmt_int(b.target) if b.target >= 1000 else str(b.target)
+                    prog = Gtk.Label(label=f"{val} / {tgt}")
+                    prog.add_css_class("caption")
+                    prog.add_css_class("dim-label")
+                    card.append(prog)
+            self.badges_flow.append(card)
+
     def _on_home_selected(self, dd, _p):
         if self._setting_home:
             return
         i = dd.get_selected()
         if 0 <= i < len(self._home_codes):
             self.emit("home-changed", self._home_codes[i])
+
+    def scroll_to_badges(self):
+        from gi.repository import Graphene
+        ok, pt = self.badges_group.compute_point(self.get_child(), Graphene.Point())
+        if ok:
+            adj = self.get_vadjustment()
+            adj.set_value(min(max(0, pt.y - 12), adj.get_upper() - adj.get_page_size()))
+        return False
 
     def scroll_to_countries(self):
         from gi.repository import Graphene

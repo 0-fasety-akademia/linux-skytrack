@@ -1,6 +1,6 @@
 # Linux-SkyTrack (linux-skytrack)
 
-**Current version: 1.4.2 (2026-11-12)**
+**Current version: 1.5.0 (2026-11-12)**
 
 A flight log and live flight tracker for Ubuntu. Log your trips, see them on a map (street, satellite or an offline outline map) with pins on every airport you have visited, and let SkyTrack count the kilometres and build statistics per year, month and day. Watch all air traffic around you live, listen to the control tower, track any flight by its number, get a poster of your year in the air, and keep backups on your disk, in Google Drive or in iCloud Drive.
 
@@ -9,6 +9,11 @@ Part of the **JGu Linux Apps** series. Created by: JGu · Supported by Claude.
 ![icon](icons/hicolor/scalable/apps/linux-skytrack.svg)
 
 ## Version history
+
+### 1.5.0 (2026-11-12): badges and calendar
+
+- **Badges** in *Statistics*: 28 badges for your whole flight log — distance (1 000 km, 10 000 km, around the Earth, to the Moon), flights (1, 10, 50, 100), countries, airports, continents, and special ones: across the Atlantic, across the equator, long haul (5 000 km+), ultra long haul (10 000 km+), jet lag (6 h+ time difference), night flight, two flights in one day, loyal flyer (10 flights with one airline), aircraft collector (5 types), the whole calendar (a flight in each of the 12 months). Earned badges show the date of the flight that earned them, the others a progress bar. A new badge shows a toast with *Show*. Badges are counted from the log on the fly, so editing or deleting a flight updates them.
+- **📅 Add to Calendar** on planned trips (*Plans* and the boarding pass): the flight — and the return flight of a there-and-back trip — goes to **Linux iCloud Calendar** (0.1.7+) as events with the airports' own time zones, flight number, seat, aircraft, distance and flight time. Without it, the `.ics` file opens in the default calendar app.
 
 ### 1.4.2 (2026-11-12)
 
@@ -161,7 +166,8 @@ Part of the **JGu Linux Apps** series. Created by: JGu · Supported by Claude.
 
 - **Trips:** round trips or single flights, historical and planned, with local times, flight numbers, seats and notes; keyboard date entry and a calendar.
 - **Map:** great-circle arcs, pins with visit counts, street / satellite / offline outline layers, visited countries highlighted.
-- **Statistics:** kilometres, flights, time in the air, airports, countries, longest flight, around the Earth / to the Moon, year → month → day breakdown, visited countries.
+- **Statistics:** kilometres, flights, time in the air, airports, countries, longest flight, around the Earth / to the Moon, year → month → day breakdown, visited countries, **28 badges**.
+- **Calendar:** planned flights go to Linux iCloud Calendar with one click (📅 Add to Calendar).
 - **Plans:** a calculator for distance, flight time, local arrival and return times and time zones; upcoming trips with countdowns; optional iCloud album.
 - **Live:** all air traffic in view, from → to routes, tracking by flight number or callsign, automatic tracking of your flights with notifications.
 - **LIVE tower radio:** the official LiveATC.net page of a chosen tower in a mini window that plays on every tab and stops when the app is minimised; check for new towers; own sources.
