@@ -1,0 +1,163 @@
+:root {
+  --pin: #e66100;
+  --pin-stroke: #ffffff;
+  --plan: #c88800;
+  --plane: #e66100;
+  --origin: #1c71d8;
+  --accent: #1c71d8;
+  --accent-2: #e66100;
+  --arc: #1c71d8;
+  --panel-bg: rgba(255, 255, 255, 0.92);
+  --panel-fg: #1e1e1e;
+  --panel-border: rgba(0, 0, 0, 0.12);
+  --muted: #5e5c64;
+}
+body.dark {
+  --accent: #78aeed;
+  --arc: #62a0ea;
+  --panel-bg: rgba(36, 36, 40, 0.92);
+  --panel-fg: #f6f5f4;
+  --panel-border: rgba(255, 255, 255, 0.12);
+  --muted: #c0bfbc;
+}
+html, body, #map { margin: 0; height: 100%; width: 100%; }
+body {
+  font-family: "Cantarell", "Inter", "Ubuntu", system-ui, sans-serif;
+  background: #aad3df;
+}
+body.dark { background: #1d2a33; }
+
+.seg {
+  position: absolute; top: 12px; right: 12px; z-index: 1000;
+  display: flex; padding: 3px; gap: 2px;
+  background: var(--panel-bg); border: 1px solid var(--panel-border);
+  border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  backdrop-filter: blur(8px);
+}
+.seg button {
+  border: 0; background: transparent; color: var(--panel-fg);
+  font: inherit; font-size: 13px; font-weight: 600;
+  padding: 6px 14px; border-radius: 7px; cursor: pointer;
+}
+.seg button:hover { background: rgba(127,127,127,.15); }
+.seg button.active { background: var(--accent); color: #fff; }
+
+.legend {
+  position: absolute; bottom: 26px; left: 12px; z-index: 1000;
+  display: flex; gap: 14px; padding: 6px 12px;
+  background: var(--panel-bg); color: var(--panel-fg);
+  border: 1px solid var(--panel-border); border-radius: 10px;
+  font-size: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}
+.legend[hidden] { display: none; }
+.legend span { display: flex; align-items: center; gap: 6px; }
+.dot-pin, .dot-origin { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+.dot-pin { background: var(--pin); }
+.dash-plan { display: inline-block; width: 18px; height: 0; border-top: 2px dashed var(--plan); }
+#legPlan[hidden] { display: none; }
+.dot-origin { background: var(--pin-stroke); border: 2px solid var(--origin); width: 7px; height: 7px; }
+
+.pin { position: relative; }
+.pin svg { filter: drop-shadow(0 2px 2px rgba(0,0,0,.35)); }
+.pin .count {
+  position: absolute; top: -4px; right: -6px;
+  min-width: 16px; height: 16px; padding: 0 4px; box-sizing: border-box;
+  border-radius: 8px; background: #241f31; color: #fff;
+  font-size: 10px; font-weight: 700; line-height: 16px; text-align: center;
+}
+.code-label {
+  background: transparent; border: 0; box-shadow: none;
+  font-weight: 700; font-size: 11px; color: #241f31;
+  text-shadow: 0 0 3px #fff, 0 0 3px #fff, 0 0 3px #fff;
+}
+.code-label::before { display: none; }
+body.sat .code-label { color: #fff; text-shadow: 0 0 3px #000, 0 0 3px #000; }
+
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  background: var(--panel-bg); color: var(--panel-fg);
+}
+.leaflet-popup-content { margin: 12px 14px; font-size: 13px; line-height: 1.45; }
+.pop-title { font-weight: 700; font-size: 14px; }
+.pop-sub { color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+.pop-list { margin: 6px 0 0; padding: 0; list-style: none; max-height: 140px; overflow: auto; }
+.pop-list li { padding: 2px 0; }
+.pop-list a { color: var(--accent); text-decoration: none; cursor: pointer; }
+.leaflet-control-attribution { font-size: 10px; }
+body.dark .leaflet-bar a { background: #303034; color: #fff; border-color: #444; }
+
+/* ---- planned pins, plane ------------------------------------------------------------ */
+.pin-planned svg path { fill: transparent; stroke: var(--plan); stroke-width: 2.5; }
+.pin-planned svg circle { fill: var(--plan); }
+.plane-marker svg { fill: var(--plane); filter: drop-shadow(0 1px 2px rgba(0,0,0,.5)); }
+body.dark { --plan: #f6d32d; }
+
+/* ---- Flighty -------------------------------------------------------------------------- */
+body.theme-flighty {
+  --accent: #4f7cff; --pin: #ffc83d; --pin-stroke: #0b0e18; --plan: #ffc83d; --plane: #ffc83d;
+  --panel-bg: rgba(14, 18, 32, 0.88); --panel-fg: #f2f4ff; --panel-border: rgba(255,255,255,.08);
+  --muted: #9aa3c7; background: #070a12; --origin: #6f97ff;
+}
+body.theme-flighty .leaflet-container { background: #0b1020; }
+body.theme-flighty.layer-map .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(200deg) brightness(.78) contrast(.92) saturate(.45);
+}
+body.theme-flighty.sat .leaflet-tile-pane { filter: brightness(.7) saturate(.8); }
+body.theme-flighty path.arc { filter: drop-shadow(0 0 3px rgba(111, 151, 255, .9)); }
+body.theme-flighty .code-label { color: #f2f4ff; text-shadow: 0 0 3px #000, 0 0 6px #000; }
+body.theme-flighty .seg button.active { background: #4f7cff; }
+
+/* ---- Matrix --------------------------------------------------------------------------- */
+body.theme-matrix {
+  --accent: #00b33c; --pin: #00ff41; --pin-stroke: #001a07; --plan: #c6ff00; --plane: #d4ff5c;
+  --panel-bg: rgba(0, 12, 3, 0.9); --panel-fg: #8dffa9; --panel-border: rgba(0,255,65,.35);
+  --muted: #4fd16f; background: #000; --origin: #00ff41;
+  font-family: "DejaVu Sans Mono", "Ubuntu Mono", monospace;
+}
+body.theme-matrix .leaflet-container { background: #000; }
+body.dark.theme-system .leaflet-container { background: #1d2a33; }
+body.theme-matrix .leaflet-tile-pane {
+  filter: grayscale(1) invert(1) brightness(.85) sepia(1) hue-rotate(70deg) saturate(4) brightness(.5);
+}
+body.theme-matrix.sat .leaflet-tile-pane {
+  filter: grayscale(1) sepia(1) hue-rotate(70deg) saturate(3) brightness(.55) contrast(1.2);
+}
+body.theme-matrix path.arc { filter: drop-shadow(0 0 3px #00ff41) drop-shadow(0 0 6px rgba(0,255,65,.6)); }
+body.theme-matrix .code-label { color: #b8ffcb; text-shadow: 0 0 4px #00ff41, 0 0 2px #000, 0 0 2px #000; }
+body.theme-matrix .pin svg { filter: drop-shadow(0 0 4px #00ff41); }
+body.theme-matrix .seg, body.theme-matrix .legend { box-shadow: 0 0 12px rgba(0,255,65,.25); }
+body.theme-matrix .seg button.active { background: #00b33c; color: #000; }
+body.theme-matrix .leaflet-bar a { background: #010d04; color: #39ff6a; border-color: rgba(0,255,65,.35); }
+body.theme-matrix .pin .count { background: #00ff41; color: #000; }
+
+/* offline outline map */
+body.layer-outline { background: #c7dbee; }
+body.dark.layer-outline, body.dark.offline { background: #0f1724; }
+body.theme-flighty.layer-outline, body.theme-flighty.offline { background: #07090f; }
+body.theme-matrix.layer-outline, body.theme-matrix.offline { background: #000; }
+body.offline:not(.dark) { background: #c7dbee; }
+.offline-note {
+  position: absolute; top: 12px; left: 56px; z-index: 1000;
+  padding: 6px 12px; border-radius: 10px; font-size: 12px; font-weight: 600;
+  background: var(--panel-bg); color: var(--panel-fg); border: 1px solid var(--panel-border);
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}
+.offline-note[hidden] { display: none; }
+
+/* live tracking */
+body.live .legend { display: none; }
+.live-plane svg { fill: var(--plane); filter: drop-shadow(0 2px 3px rgba(0,0,0,.45)); transition: transform .6s; }
+.live-plane.stale svg { opacity: .45; }
+.live-label { font-size: 12px; }
+
+/* traffic (every aircraft in view) */
+.traffic-plane svg { fill: #8eaaff; stroke: rgba(0,0,0,.55); stroke-width: .6; cursor: pointer;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.4)); }
+body:not(.dark):not(.sat) .traffic-plane svg { fill: #1c71d8; stroke: #fff; }
+.traffic-plane svg.ground { opacity: .55; }
+.traffic-plane svg.selected { fill: var(--plane); }
+body.theme-matrix .traffic-plane svg { fill: #39ff6a; }
+.pop-btn { display: inline-block; padding: 5px 14px; border-radius: 999px; background: var(--accent);
+  color: #fff !important; font-weight: 700; cursor: pointer; text-decoration: none; }
+.pop-tracking { margin: 8px 0 0; font-weight: 700; color: var(--accent-2); }
+.pop-tracking::before { content: "● "; animation: blink 1.4s infinite; }
+@keyframes blink { 50% { opacity: .25; } }

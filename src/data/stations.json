@@ -1,0 +1,16 @@
+{
+  "source": "LiveATC.net feed index (Europe)",
+  "checked": "2026-11-08",
+  "stations": [
+    {"icao": "EPGD", "name": "EPGD Tower/Approach", "mount": "epgd", "status": "DOWN"},
+    {"icao": "EPWA", "name": "EPWA Tower", "status": "UP"},
+    {"icao": "EPWA", "name": "EPWA Approach #1", "status": "UP"},
+    {"icao": "EPWA", "name": "EPWA Approach #2", "status": "UP"},
+    {"icao": "EPWA", "name": "EPWA Ground", "status": "UP"},
+    {"icao": "EPKT", "name": "EPKT Del/Twr/App", "status": "UP"},
+    {"icao": "EPKT", "name": "EPKT Delivery/Approach", "status": "UP"},
+    {"icao": "EPWR", "name": "EPWR Tower", "status": "UP"},
+    {"icao": "EPKK", "name": "EPKK Tower/App", "status": "DOWN"},
+    {"icao": "EPLL", "name": "EPLL Tower", "status": "DOWN"}
+  ]
+}

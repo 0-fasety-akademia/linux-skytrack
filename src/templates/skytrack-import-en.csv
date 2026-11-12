@@ -1,0 +1,2 @@
+Departure country;From;Destination country;To;Departure date;Departure time;Return date;Return departure time;Flight no. out;Flight no. return;Airline;Notes
+GB;LHR;US;JFK;2026-09-01;09:00;2026-09-08;18:30;;;;example — delete this row

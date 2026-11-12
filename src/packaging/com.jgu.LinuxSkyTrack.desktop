@@ -1,0 +1,20 @@
+[Desktop Entry]
+Type=Application
+Name=Linux-SkyTrack
+GenericName=Flight log
+GenericName[pl]=Dziennik lotów
+Comment=Your flights on a map, kilometres flown and statistics
+Comment[pl]=Twoje loty na mapie, kilometry odbytych lotów i statystyki
+Exec=linux-skytrack
+Icon=linux-skytrack
+Terminal=false
+Categories=Utility;Travel;Maps;GTK;
+Keywords=flight;flights;plane;airport;travel;map;lot;loty;samolot;lotnisko;podróż;
+StartupNotify=true
+StartupWMClass=com.jgu.LinuxSkyTrack
+Actions=add-trip;
+
+[Desktop Action add-trip]
+Name=Add trip
+Name[pl]=Dodaj podróż
+Exec=linux-skytrack --add

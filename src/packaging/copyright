@@ -1,0 +1,23 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: linux-skytrack
+Source: https://github.com/0-fasety-akademia/linux-skytrack
+
+Files: *
+Copyright: 2026 JGu
+License: SkyTrack-Freeware-NoMods
+ Free to use and to redistribute unmodified, free of charge.
+ Modification is not allowed. Full text: /usr/share/doc/linux-skytrack/LICENSE
+ Versions before 1.3.0 were published under the MIT License.
+
+Files: web/leaflet/*
+Copyright: 2010-2023 Volodymyr Agafonkin, 2010-2011 CloudMade
+License: BSD-2-Clause
+
+Files: data/airports.json
+Copyright: OurAirports contributors
+License: public-domain
+ Airport data from https://ourairports.com/data/ (released to the public domain).
+
+Comment: Map tiles are loaded at runtime from OpenStreetMap (ODbL, © OpenStreetMap
+ contributors) and Esri World Imagery (Esri, Maxar, Earthstar Geographics, GIS User
+ Community); they are not shipped in this package.

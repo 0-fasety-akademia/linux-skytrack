@@ -1,14 +1,18 @@
 # Linux-SkyTrack (linux-skytrack)
 
-**Current version: 1.4.0 (2026-11-09)**
+**Current version: 1.4.1 (2026-11-12)**
 
 A flight log and live flight tracker for Ubuntu. Log your trips, see them on a map (street, satellite or an offline outline map) with pins on every airport you have visited, and let SkyTrack count the kilometres and build statistics per year, month and day. Watch all air traffic around you live, listen to the control tower, track any flight by its number, get a poster of your year in the air, and keep backups on your disk, in Google Drive or in iCloud Drive.
 
 Part of the **JGu Linux Apps** series. Created by: JGu · Supported by Claude.
 
-![icon](icons/hicolor/scalable/apps/linux-skytrack.svg)
+![icon](src/icons/hicolor/scalable/apps/linux-skytrack.svg)
 
 ## Version history
+
+### 1.4.1 (2026-11-12)
+
+- No changes in the app. The repository now keeps the source code in `src/`, and the `.deb` is published on the GitHub Releases page (built by GitHub Actions for every version tag). README: installation from Releases.
 
 ### 1.4.0 (2026-11-09): Linux-SkyTrack
 
@@ -166,9 +170,11 @@ Part of the **JGu Linux Apps** series. Created by: JGu · Supported by Claude.
 
 ## Installation
 
+Download the newest `linux-skytrack_<version>_all.deb` from the [Releases page](https://github.com/jgu-linux-apps/linux-skytrack/releases/latest) (and, optionally, `linux-icloud-photos_<version>_all.deb` from the [Linux iCloud Photos releases](https://github.com/jgu-linux-apps/linux-icloud-photos/releases/latest)), then:
+
 ```bash
-sudo apt install ./linux-skytrack_1.2.1_all.deb
-sudo apt install ./linux-icloud-photos_0.16.1_all.deb   # optional: trip photos and iCloud Drive backups
+sudo apt install ./linux-skytrack_<version>_all.deb
+sudo apt install ./linux-icloud-photos_<version>_all.deb   # optional: trip photos and iCloud Drive backups
 ```
 
 Needs Ubuntu 24.04 or newer (GTK 4, libadwaita ≥ 1.5, WebKitGTK 6.0). Dependencies are installed automatically. `python3-openpyxl` (for `.xlsx` import) is recommended; Google Drive backups use `gvfs-backends` and `gnome-online-accounts`, which are part of the standard Ubuntu desktop.
@@ -236,6 +242,8 @@ Estimated flight time = distance / 820 km/h + 30 min (taxi, climb, approach).
 
 ## Running from source
 
+The source code is in the `src/` folder of this repository; the `.deb` packages are not kept in git but attached to [GitHub Releases](https://github.com/jgu-linux-apps/linux-skytrack/releases). Pushing a tag `vX.Y.Z` that matches `VERSION` in `src/skytrack/version.py` makes GitHub Actions (`.github/workflows/release.yml`) build the package and publish the release. Run the commands in this section inside `src/`:
+
 ```bash
 sudo apt install python3-gi python3-gi-cairo python3-cairo gir1.2-gtk-4.0 gir1.2-adw-1 gir1.2-webkit-6.0
 ./linux-skytrack
@@ -255,6 +263,8 @@ Data files are rebuilt with the scripts in `tools/`:
 | `templates/*.ods`, `*.csv` | `build_template.py pl` / `en`, then `fix_template_lo.py` | the airport database |
 
 ## Project structure
+
+Paths relative to `src/`:
 
 ```
 linux-skytrack            launcher

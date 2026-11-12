@@ -1,0 +1,4 @@
+#!/bin/sh
+# linux-skytrack: started through pkexec only to confirm the Ubuntu administrator password
+# before a forgotten SkyTrack password is reset. It does nothing and changes nothing.
+exit 0

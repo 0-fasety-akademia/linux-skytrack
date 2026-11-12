@@ -1,0 +1,5 @@
+VERSION = "1.4.1"
+RELEASE_DATE = "2026-11-12"
+APP_ID = "com.jgu.LinuxSkyTrack"
+APP_NAME = "Linux-SkyTrack"
+REPO_URL = "https://github.com/0-fasety-akademia/linux-skytrack"

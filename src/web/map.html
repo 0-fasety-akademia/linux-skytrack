@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SkyTrack map</title>
+<link rel="stylesheet" href="leaflet/leaflet.css">
+<link rel="stylesheet" href="map.css">
+</head>
+<body>
+<div id="map"></div>
+<div class="seg" id="layerSwitch" role="group" aria-label="Warstwa mapy">
+  <button data-layer="map" class="active" data-t="map">Mapa</button>
+  <button data-layer="sat" data-t="sat">Satelita</button>
+  <button data-layer="outline" data-t="outline" title="Bez internetu">Kontur</button>
+</div>
+<div class="offline-note" id="offlineNote" hidden data-t="offline">Brak internetu — mapa konturowa</div>
+<div class="legend" id="legend" hidden>
+  <span><i class="dot-pin"></i><span data-t="legVisited">odwiedzone</span></span>
+  <span><i class="dot-origin"></i><span data-t="legOrigin">wylot</span></span>
+  <span id="legPlan" hidden><i class="dash-plan"></i><span data-t="legPlanned">zaplanowane</span></span>
+</div>
+<script src="leaflet/leaflet.js"></script>
+<script src="topojson/topojson-client.min.js"></script>
+<script src="world.js"></script>
+<script src="map.js"></script>
+</body>
+</html>
