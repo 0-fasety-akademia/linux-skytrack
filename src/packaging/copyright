@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: linux-skytrack
-Source: https://github.com/0-fasety-akademia/linux-skytrack
+Source: https://github.com/jgu-linux-apps/linux-skytrack
 
 Files: *
 Copyright: 2026 JGu

@@ -38,7 +38,7 @@ Depends: python3 (>= 3.10), python3-gi, python3-gi-cairo, python3-cairo, gir1.2-
 Recommends: python3-openpyxl, gstreamer1.0-plugins-good, gstreamer1.0-libav
 Suggests: linux-icloud-photos (>= 0.16.0), libreoffice-calc, gvfs-backends, gnome-online-accounts
 Maintainer: JGu <noreply@github.com>
-Homepage: https://github.com/0-fasety-akademia/linux-skytrack
+Homepage: https://github.com/jgu-linux-apps/linux-skytrack
 Description: SkyTrack - flight log, live tracking and maps for Ubuntu
  Log your flights (from, to, exact dates and times), see them as great-circle
  arcs with pins on visited airports (map, satellite or an offline outline

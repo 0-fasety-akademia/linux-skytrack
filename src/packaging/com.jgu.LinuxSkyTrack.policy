@@ -3,7 +3,7 @@
  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
 <policyconfig>
   <vendor>JGu Linux Apps</vendor>
-  <vendor_url>https://github.com/0-fasety-akademia/linux-skytrack</vendor_url>
+  <vendor_url>https://github.com/jgu-linux-apps/linux-skytrack</vendor_url>
   <icon_name>linux-skytrack</icon_name>
   <action id="com.jgu.LinuxSkyTrack.reset-password">
     <description>Reset the SkyTrack password</description>

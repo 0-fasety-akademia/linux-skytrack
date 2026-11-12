@@ -11,7 +11,7 @@ from . import db
 from .version import VERSION
 from .i18n import IS_PL
 
-USER_AGENT = (f"linux-skytrack/{VERSION} (+https://github.com/0-fasety-akademia/linux-skytrack) "
+USER_AGENT = (f"linux-skytrack/{VERSION} (+https://github.com/jgu-linux-apps/linux-skytrack) "
               "WebKitGTK")
 
 
