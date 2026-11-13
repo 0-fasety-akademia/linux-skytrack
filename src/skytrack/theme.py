@@ -5,7 +5,9 @@ gi.require_version("Adw", "1")
 from gi.repository import Adw, Gdk, Gtk
 from .i18n import _
 
-THEMES = {"system": _('Systemowy (jasny / ciemny)'), "flighty": "Flighty", "matrix": "Matrix"}
+THEMES = {"system": _('Systemowy (jasny / ciemny)'), "aurora": _('Aurora (jasny / ciemny)'), "flighty": "Flighty",
+          "matrix": "Matrix"}
+_dark_hook = 0
 
 BASE = """
 .atc-live .atc-dot { color: alpha(currentColor, .35); font-size: 9pt; }
@@ -138,6 +140,7 @@ window, dialog, popover, .pass, label, entry, button {
 """
 
 _providers = {}
+_current = ["system"]
 
 
 def apply(name):
@@ -151,8 +154,17 @@ def apply(name):
         t = Gtk.CssProvider()
         Gtk.StyleContext.add_provider_for_display(display, t, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION + 1)
         _providers["theme"] = t
-    css = {"flighty": FLIGHTY, "matrix": MATRIX}.get(name, SYSTEM)
-    _providers["theme"].load_from_string(css)
     sm = Adw.StyleManager.get_default()
+    css = {"flighty": FLIGHTY, "matrix": MATRIX}.get(name, SYSTEM)
+    if name == "aurora":                       # Aurora: jasna/ciemna według systemu, przeliczana przy zmianie
+        global _dark_hook
+        from . import aurora_css
+        sm.set_color_scheme(Adw.ColorScheme.DEFAULT)
+        css = SYSTEM + aurora_css.css_for(sm.get_dark())
+        if not _dark_hook:
+            _dark_hook = sm.connect("notify::dark", lambda m, _p: _providers["theme"].load_from_string(
+                SYSTEM + aurora_css.css_for(m.get_dark())) if _current[0] == "aurora" else None)
+    _current[0] = name
+    _providers["theme"].load_from_string(css)
     sm.set_color_scheme(Adw.ColorScheme.FORCE_DARK if name in ("flighty", "matrix")
                         else Adw.ColorScheme.DEFAULT)

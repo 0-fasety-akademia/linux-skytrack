@@ -339,6 +339,7 @@ EN = {
 
     # Main window
     'Systemowy (jasny / ciemny)': 'System (light / dark)',
+    'Aurora (jasny / ciemny)': 'Aurora (light / dark)',
     'Wygląd': 'Appearance',
     'Importuj podróże (arkusz / CSV)…': 'Import trips (spreadsheet / CSV)…',
     'Zapisz szablon importu…': 'Save import template…',

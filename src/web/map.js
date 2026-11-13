@@ -148,6 +148,7 @@
     system:  { arc: "#1c71d8", arcDark: "#99c1f1", focus: "#e66100", plan: "#c88800", planDark: "#f6d32d" },
     flighty: { arc: "#6f97ff", arcDark: "#6f97ff", focus: "#ffc83d", plan: "#ffc83d", planDark: "#ffc83d" },
     matrix:  { arc: "#00ff41", arcDark: "#00ff41", focus: "#d4ff5c", plan: "#c6ff00", planDark: "#c6ff00" },
+    aurora:  { arc: "#7c5cff", arcDark: "#22d3ee", focus: "#ec4899", plan: "#8b5cf6", planDark: "#c4b5fd" },
   };
 
   function arcStyle(active, planned) {
@@ -214,7 +215,7 @@
       if (dests.has(code)) continue;
       const pal = PALETTE[theme] || PALETTE.system;
       L.circleMarker([o.ap.lat, o.ap.lon], {
-        radius: 5, color: pal.arcDark, weight: 2, fillColor: theme === "system" ? "#fff" : "#000",
+        radius: 5, color: pal.arcDark, weight: 2, fillColor: (theme === "system" || theme === "aurora") ? "#fff" : "#000",
         fillOpacity: 1, className: "origin",
       }).bindPopup(popupFor(o.ap, [], o.n))
         .bindTooltip(code, { permanent: true, direction: "right", className: "code-label", offset: [6, 0] })
@@ -273,15 +274,17 @@
     const pal = PALETTE[theme] || PALETTE.system;
     pointsLayer.eachLayer((l) => {
       if (l instanceof L.CircleMarker) l.setStyle({ color: pal.arcDark,
-        fillColor: theme === "system" ? "#fff" : "#000" });
+        fillColor: (theme === "system" || theme === "aurora") ? "#fff" : "#000" });
     });
     placePlane();
   }
 
   function setTheme(name, dark) {
     theme = PALETTE[name] ? name : "system";
-    document.body.classList.toggle("dark", !!dark || theme !== "system");
-    ["system", "flighty", "matrix"].forEach((n) => document.body.classList.toggle("theme-" + n, n === theme));
+    document.body.classList.toggle("dark", !!dark || (theme !== "system" && theme !== "aurora"));
+    // Aurora korzysta z tej samej mapy co Systemowy (przygaszona w jasnym, ciemna w ciemnym) – inne są tylko trasy
+    ["system", "flighty", "matrix"].forEach((n) => document.body.classList.toggle("theme-" + n,
+      n === theme || (n === "system" && theme === "aurora")));
     restyle();
     restyleOutline();
     if (liveData) setLive(liveData, false);
@@ -332,7 +335,7 @@
   }
   function apMarker(ap, cls) {
     return L.circleMarker([ap.lat, ap.lon], { radius: 5, weight: 2, className: cls,
-      color: (PALETTE[theme] || PALETTE.system).arcDark, fillColor: theme === "system" ? "#fff" : "#000",
+      color: (PALETTE[theme] || PALETTE.system).arcDark, fillColor: (theme === "system" || theme === "aurora") ? "#fff" : "#000",
       fillOpacity: 1 }).bindTooltip(ap.iata, { permanent: true, direction: "right",
       className: "code-label", offset: [6, 0] });
   }

@@ -1,6 +1,6 @@
 # Linux-SkyTrack (linux-skytrack)
 
-**Current version: 1.5.1 (2026-11-13)**
+**Current version: 1.5.2 (2026-11-13)**
 
 A flight log and live flight tracker for Ubuntu. Log your trips, see them on a map (street, satellite or an offline outline map) with pins on every airport you have visited, and let SkyTrack count the kilometres and build statistics per year, month and day. Watch all air traffic around you live, listen to the control tower, track any flight by its number, get a poster of your year in the air, and keep backups on your disk, in Google Drive or in iCloud Drive.
 
@@ -9,6 +9,10 @@ Part of the **JGu Linux Apps** series. Created by: JGu · Supported by Claude.
 ![icon](icons/hicolor/scalable/apps/linux-skytrack.svg)
 
 ## Version history
+
+### 1.5.2 (2026-11-13): Aurora theme
+
+- New **Aurora** theme (menu → Theme): pastel glass in light mode, an aurora glow on deep navy in dark mode – it follows the system light/dark setting by itself. Flight arcs are violet (light) / cyan (dark), the selected flight pink; the map behaves like in the System theme (muted in light mode, dark in dark mode).
 
 ### 1.5.1 (2026-11-13): easier-to-read map
 
