@@ -133,6 +133,7 @@ class MainWindow(Adw.ApplicationWindow):
         menu = Gio.Menu()
         looks = Gio.Menu()
         looks.append(_('Systemowy (jasny / ciemny)'), "app.theme::system")
+        looks.append(_('Aurora (jasny / ciemny)'), "app.theme::aurora")
         looks.append("Flighty", "app.theme::flighty")
         looks.append("Matrix", "app.theme::matrix")
         menu.append_submenu(_('Wygląd'), looks)
