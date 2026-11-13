@@ -158,6 +158,10 @@ body.live .legend { display: none; }
 
 /* jasny tryb: przygaszony podkład (tylko kafelki mapy – trasy, pinezki, kraje i samoloty w pełnym kolorze) */
 body:not(.dark):not(.sat) .leaflet-tile-pane { filter: saturate(.35) brightness(.93) contrast(.94); }
+/* ciemny tryb (motyw systemowy): mapa odwrócona do ciemnej szarości, pasuje do ciemnego interfejsu */
+body.dark.theme-system.layer-map .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(.88) contrast(.9) saturate(.35);
+}
 body.theme-matrix .traffic-plane svg { fill: #39ff6a; }
 .pop-btn { display: inline-block; padding: 5px 14px; border-radius: 999px; background: var(--accent);
   color: #fff !important; font-weight: 700; cursor: pointer; text-decoration: none; }

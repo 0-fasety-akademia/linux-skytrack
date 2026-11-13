@@ -13,7 +13,7 @@ Part of the **JGu Linux Apps** series. Created by: JGu · Supported by Claude.
 ### 1.5.1 (2026-11-13): easier-to-read map
 
 - **Aircraft in yellow** with a dark outline (light and dark mode) instead of blue – a colour that hardly appears on maps (blue water, green forests, red roads), so planes stand out from any background; slightly bigger icons. The selected aircraft is orange.
-- **Muted base map in light mode**: the OpenStreetMap tiles are shown with less colour and a touch darker, like a flight radar map. Only the base map is muted – your routes, airport pins, visited countries and aircraft keep their full colour. Satellite view is unchanged.
+- **Muted base map in light mode**: the OpenStreetMap tiles are shown with less colour and a touch darker, like a flight radar map. **Dark base map in dark mode** (system theme): the same tiles turned into a neutral dark grey that matches the dark window. Only the base map is changed – your routes, airport pins, visited countries and aircraft keep their full colour. Satellite view and the Flighty / Matrix themes are unchanged.
 
 ### 1.5.0 (2026-11-12): badges and calendar
 
