@@ -378,11 +378,11 @@
   const trafficRoute = L.layerGroup().addTo(map);
   const trafficMarkers = new Map();
   let selectedHex = null, liveMode = false;
-  const planeSvg = (hdg, cls) => `<svg class="${cls}" width="22" height="22" viewBox="0 0 16 16" style="transform:rotate(${hdg}deg)">
+  const planeSvg = (hdg, cls) => `<svg class="${cls}" width="24" height="24" viewBox="0 0 16 16" style="transform:rotate(${hdg}deg)">
       <path d="M8 .8C8.9.8 9.2 2 9.2 3v2.6L15 9.2v1.6L9.2 9v3.4l1.8 1.4V15L8 14.2 5 15v-1.2l1.8-1.4V9L1 10.8V9.2l5.8-3.6V3C6.8 2 7.1.8 8 .8z"/></svg>`;
   function trafficIcon(p) {
     const cls = (p.g ? "ground" : "") + (p.h === selectedHex ? " selected" : "");
-    return L.divIcon({ className: "traffic-plane", iconSize: [22, 22], iconAnchor: [11, 11],
+    return L.divIcon({ className: "traffic-plane", iconSize: [24, 24], iconAnchor: [12, 12],
       html: planeSvg(Math.round(p.tr || 0), cls) });
   }
   function setTraffic(list) {

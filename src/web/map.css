@@ -150,11 +150,14 @@ body.live .legend { display: none; }
 .live-label { font-size: 12px; }
 
 /* traffic (every aircraft in view) */
-.traffic-plane svg { fill: #8eaaff; stroke: rgba(0,0,0,.55); stroke-width: .6; cursor: pointer;
-  filter: drop-shadow(0 1px 1px rgba(0,0,0,.4)); }
-body:not(.dark):not(.sat) .traffic-plane svg { fill: #1c71d8; stroke: #fff; }
+/* żółte z ciemnym obrysem – kolor, którego na mapie prawie nie ma, więc samoloty odcinają się od każdego tła */
+.traffic-plane svg { fill: #ffc83d; stroke: #1a2238; stroke-width: .7; cursor: pointer;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.45)); }
 .traffic-plane svg.ground { opacity: .55; }
-.traffic-plane svg.selected { fill: var(--plane); }
+.traffic-plane svg.selected { fill: #ff6a00; stroke: #fff; stroke-width: .8; }
+
+/* jasny tryb: przygaszony podkład (tylko kafelki mapy – trasy, pinezki, kraje i samoloty w pełnym kolorze) */
+body:not(.dark):not(.sat) .leaflet-tile-pane { filter: saturate(.35) brightness(.93) contrast(.94); }
 body.theme-matrix .traffic-plane svg { fill: #39ff6a; }
 .pop-btn { display: inline-block; padding: 5px 14px; border-radius: 999px; background: var(--accent);
   color: #fff !important; font-weight: 700; cursor: pointer; text-decoration: none; }
