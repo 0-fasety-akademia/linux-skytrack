@@ -1,21 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
-  <defs>
-    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#62a0ea"/><stop offset="1" stop-color="#1a5fb4"/>
-    </linearGradient>
-    <linearGradient id="side" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#1c71d8"/><stop offset="1" stop-color="#154a8f"/>
-    </linearGradient>
-  </defs>
-  <rect x="8" y="14" width="112" height="106" rx="24" fill="url(#side)"/>
-  <rect x="8" y="8" width="112" height="106" rx="24" fill="url(#sky)"/>
-  <ellipse cx="38" cy="38" rx="22" ry="8" fill="#fff" opacity=".18"/>
-  <ellipse cx="92" cy="86" rx="18" ry="6" fill="#fff" opacity=".14"/>
-  <path d="M30 92 C38 52 66 30 96 30" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-dasharray="0.1 11" opacity=".95"/>
-  <circle cx="30" cy="92" r="8" fill="#fff"/><circle cx="30" cy="92" r="3.6" fill="#1c71d8"/>
-  <path d="M96 13c-8.3 0-15 6.6-15 14.8C81 39 96 55 96 55s15-16 15-27.2C111 19.6 104.3 13 96 13z" fill="#ff7800" stroke="#fff" stroke-width="3"/>
-  <circle cx="96" cy="28" r="5.5" fill="#fff"/>
-  <g transform="translate(46 44) rotate(48) scale(2.6) translate(-8 -8)">
-    <path fill="#fff" d="M8 0.8C8.9 0.8 9.2 2 9.2 3L9.2 5.6 15 9.2 15 10.8 9.2 9 9.2 12.4 11 13.8 11 15 8 14.2 5 15 5 13.8 6.8 12.4 6.8 9 1 10.8 1 9.2 6.8 5.6 6.8 3C6.8 2 7.1 0.8 8 0.8Z"/>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256"><defs><linearGradient id='t' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#0ea5e9'/><stop offset='1' stop-color='#1e40af'/></linearGradient></defs><rect x='10' y='10' width='236' height='236' rx='58' fill='url(#t)'/>
+ <g fill="none" stroke="rgba(255,255,255,.55)" stroke-width="5"><circle cx="128" cy="136" r="76"/><ellipse cx="128" cy="136" rx="34" ry="76"/><path d="M52 136h152M62 98h132M62 174h132"/></g>
+ <path d="M44 210 C 90 196 140 150 170 96" fill="none" stroke="#ffb020" stroke-width="8" stroke-linecap="round" stroke-dasharray="1 16"/>
+ <g transform="translate(182 76) rotate(38) scale(1.35)"><path d="M0 -26 C3 -26 5 -22 5 -16 L5 -6 L28 8 L28 15 L5 7 L5 19 L13 25 L13 31 L0 27 L-13 31 L-13 25 L-5 19 L-5 7 L-28 15 L-28 8 L-5 -6 L-5 -16 C-5 -22 -3 -26 0 -26 Z" fill="#ffffff"/></g>
 </svg>
